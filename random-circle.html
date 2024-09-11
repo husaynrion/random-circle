@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="" content="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.10.0/p5.min.js"></script>
+    <title>Random Circle</title>
+  </head>
+  <body>
+    <style type="text/css" media="all">
+      *{padding:0;margin:0;}
+    </style>
+    <script type="text/javascript" charset="utf-8">
+    var x={}, y={},d={},r={},g={},b={};
+    var nop = 700;
+    function setup(){
+      createCanvas(1000,1400);
+      var i=0;
+      while(i<nop){
+        r[i]=random(20,255);
+        g[i]=random(20,255);
+        b[i]=random(20,255);
+        var ranx,rany,rand;
+        ranx=random(100,900);
+        rany=random(100,1300);
+        rand=random(10,400);
+        var t=1;
+        for(var j=0;j<i;j++){
+          var dis= Math.pow((x[j]-ranx),2)+Math.pow((y[j]-rany),2);
+          var dsq= Math.pow((d[j]+rand)/2,2);
+          if((dis<dsq)||(ranx-rand/2<100)||(ranx+rand/2>900)||(rany+rand/2>1300)||(rany-rand/2<100)){
+            t=0;
+          }
+          
+        }
+        if(t==1){
+          x[i]=ranx;
+          y[i]=rany;
+          d[i]=rand;
+          i++;
+        }
+      }
+    }
+    var test=0;
+    function draw(){
+      background (0);
+      for(var i=0;i<test;i++){
+        var ii=nop-1-i;
+        fill(r[i],g[i],b[i]);
+        noStroke();
+        ellipse(x[i],y[i],d[i],d[i]);
+      }
+    }
+    
+var id = setInterval(frame, 50);
+function frame(){
+  if (test == nop) {
+    clearInterval(id);
+    console.log(test);
+  } else {
+      test++;
+  }
+}
+    </script>
+  </body>
+</html>
